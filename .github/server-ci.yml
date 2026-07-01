@@ -22,10 +22,16 @@ jobs:
           node-version: 24
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd ./server
+          npm ci
       
       - name: Run ESLint
-        run: npm run lint
+        run: |
+          cd ./server
+          npm run lint
       
       - name: Run Tests
-        run: npm run test
+        run: |
+          cd ./server
+          npm run test
