@@ -45,10 +45,19 @@ jobs:
       - name: Run Tests
         run: npm run test
 
-      - name: Build Docker image
-        run: |
-          docker build -t ci-docker-server .
-          docker images
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_ACCESS_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+      
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: sureshjat0/ci-docker-server:latest
 
   client:
     runs-on: ubuntu-latest
@@ -75,20 +84,6 @@ jobs:
       
       - name: Run Tests
         run: npm run test
-
-      - uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_ACCESS_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-      
-      - uses: docker/build-push-actions@v6
-        with:
-          context: .
-          push: false
-          tags: sureshjat0/ci-docker-server:latest
 
       - name: Build React(vite)
         run: npm run build
