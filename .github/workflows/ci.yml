@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: npm
@@ -45,6 +45,11 @@ jobs:
       - name: Run Tests
         run: npm run test
 
+      - name: Build Docker image
+        run: |
+          docker build -t ci-docker-server .
+          docker images
+
   client:
     runs-on: ubuntu-latest
     defaults:
@@ -53,10 +58,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: npm
