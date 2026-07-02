@@ -56,7 +56,7 @@ jobs:
       - uses: docker/build-push-action@v7
         with:
           context: ./server
-          push: false
+          push: true
           tags: sureshjat0/ci-docker-server:latest
 
   client:
