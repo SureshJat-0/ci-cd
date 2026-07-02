@@ -1,30 +1,26 @@
-import http from "node:http";
+import dotenv from "dotenv";
+dotenv.config();
 
-const PORT = 3000;
+import express from "express";
+import mongoose from "mongoose";
 
-const server = http.createServer((req, res) => {
-  res.setHeader("Content-Type", "application/json");
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-  if (req.url === "/" && req.method === "GET") {
-    res.writeHead(200);
-    res.end(
-      JSON.stringify({
-        status: "success",
-        message: "Hello from native Node.js server!",
-      }),
-    );
-    return;
-  }
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then((res) => {
+    console.log("MongoDB Connected!");
+  })
+  .catch((err) => console.log("Error: ", err));
 
-  res.writeHead(404);
-  res.end(
-    JSON.stringify({
-      status: "fail",
-      message: "Route not found",
-    }),
-  );
+app.get("/", (req, res) => {
+  res.status(200).send({
+    status: "success",
+    message: "Hello from Node.js server!",
+  });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server is running natively on http://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
