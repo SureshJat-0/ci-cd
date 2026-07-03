@@ -1,4 +1,4 @@
-name: Server CI CD
+name: Server CI/CD
 
 on:
   push:
@@ -45,12 +45,12 @@ jobs:
         with:
           context: ./server
           push: true
-          platforms: linux/amd64, linux/arm64
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_ACCESS_USERNAME}}/ci-docker-server:latest
             ${{ secrets.DOCKER_ACCESS_USERNAME}}/ci-docker-server:${{ github.sha }}
           cache-from: type=gha
-          cache-to: type=gha, node=max
+          cache-to: type=gha,mode=max
 
       - name: Triger Render Deploy
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

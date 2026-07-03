@@ -1,4 +1,4 @@
-name: MERN Monorepo CI
+name: Client CI/CD
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  client:
+  ci:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -49,14 +49,15 @@ jobs:
         with:
           context: ./client
           push: true
-          platforms: linux/arm64, linux/amd64
+          platforms: linux/arm64,linux/amd64
           tags: |
             ${{ secrets.DOCKER_ACCESS_USERNAME }}/ci-docker-client:latest
             ${{ secrets.DOCKER_ACCESS_USERNAME }}/ci-docker-client:${{ github.sha }}
           cache-from: type=gha
-          cache-to: type=gha, node=max
+          cache-to: type=gha,mode=max
 
-  client-deploy:
+  cd:
+    needs: ci
     runs-on: ubuntu-latest
     defaults:
       run:
