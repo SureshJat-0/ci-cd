@@ -59,3 +59,5 @@ README.md
 LICENSE
 .DS_Store
 Thumbs.db
+
+.vercel/
