@@ -59,7 +59,7 @@ jobs:
         with:
           context: ./server
           push: true
-          platforms: linux/amr64, linux/amd64
+          platforms: linux/arm64, linux/amd64
           tags: |
             ${{ secrets.DOCKER_ACCESS_USERNAME }}/ci-docker-server:latest
             ${{ secrets.DOCKER_ACCESS_USERNAME }}/ci-docker-server:${{ github.sha }}
@@ -109,7 +109,7 @@ jobs:
         with:
           context: ./client
           push: true
-          platforms: linux/amr64, linux/amd64
+          platforms: linux/arm64, linux/amd64
           tags: |
             ${{ secrets.DOCKER_ACCESS_USERNAME }}/ci-docker-client:latest
             ${{ secrets.DOCKER_ACCESS_USERNAME }}/ci-docker-client:${{ github.sha }}
