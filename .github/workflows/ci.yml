@@ -119,9 +119,6 @@ jobs:
   client-deploy:
     needs: client
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: client
 
     steps:
       - name: Checkout Repository
