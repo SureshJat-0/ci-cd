@@ -133,6 +133,7 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: client/package-lock.json
+          
       - run: npm install -g vercel
 
       - name: Pull project
