@@ -117,6 +117,7 @@ jobs:
           cache-to: type=gha, node=max
 
   client-deploy:
+    needs: client
     runs-on: ubuntu-latest
     defaults:
       run:
