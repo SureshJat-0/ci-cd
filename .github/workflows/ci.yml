@@ -148,6 +148,7 @@ jobs:
 
       - name: Build
         run: |
+          cd ..
           vercel build \
             --prod \
             --token=${{ secrets.VERCEL_TOKEN }}
